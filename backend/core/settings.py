@@ -66,7 +66,8 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "http://127.0.0.1:5173"
+    "http://127.0.0.1:5173",
+    "https://robust-tranquility-production.up.railway.app"
 ]
 
 ROOT_URLCONF = 'core.urls'
