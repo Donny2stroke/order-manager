@@ -1,0 +1,13 @@
+@use "bootstrap/scss/bootstrap" with (
+  $primary: #df0002
+);
+body {
+  background-color: #f8f9fa;
+}
+
+main {
+  min-height: 80vh;
+}
+.router-link-active{
+  color: white !important;
+}

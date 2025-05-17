@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+env/
+venv/
+*.env
+
+# Node / Vue
+node_modules/
+dist/
+.vite/
+.DS_Store
+
+# Docker
+*.pid
+*.db
+*.sock
+*.tar
+
+# VSCode
+.vscode/
