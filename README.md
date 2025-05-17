@@ -240,6 +240,15 @@ Tests cover:
 
 ---
 
+## Hosted deployment (Railway)
+
+You can test the application live using the links below:
+
+- **Frontend**: [https://robust-tranquility-production.up.railway.app](https://robust-tranquility-production.up.railway.app)
+- **Backend**: [https://order-manager-production-dab7.up.railway.app](https://order-manager-production-dab7.up.railway.app)
+
+---
+
 ## Resources consulted
 
 - [Django Docs](https://docs.djangoproject.com/en/4.2/)
