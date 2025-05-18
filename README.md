@@ -1,9 +1,9 @@
 
 # Full Stack Order Manager
 
-Technical test for the development of a full stack application consisting of a Django REST API backend and a Vue.js frontend for managing customer orders and related products.
+Technical test for the development of a full stack application consisting of a Django REST API backend and a Vue.js frontend for managing orders and related products.
 
-The system allows full CRUD management of orders and products, with quantity support (many-to-many), search, filters, JWT authentication, soft delete, tests and automatic initialization via Docker.
+The system allows full CRUD management of orders and products, with quantity support, search, filters, JWT authentication, soft delete, tests and automatic initialization via Docker.
 
 ---
 
@@ -19,9 +19,9 @@ The system allows full CRUD management of orders and products, with quantity sup
 
 ## Implementation details
 
-The project simulates the backend and frontend of a basic e-commerce order management system.  
+The project simulates the backend and frontend of a basic order management system.  
 It allows:
-- Listing and searching orders by customer name, description or date
+- Listing and searching orders by name, description or date
 - Associating orders with products and quantities
 - Managing the product catalog (creation, update, soft deletion)
 - Authenticated access via JWT
@@ -52,7 +52,7 @@ It allows:
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/order-manager.git
+git clone https://github.com/Donny2stroke/order-manager.git
 cd order-manager
 ```
 
@@ -110,17 +110,17 @@ python manage.py runserver
 
 ### Available API endpoints
 
-| Method | Endpoint           | Description                    |
-|--------|--------------------|--------------------------------|
-| GET    | `/api/orders`      | List and filter orders         |
-| POST   | `/api/orders`      | Create new order               |
-| GET    | `/api/orders/<id>` | View order details             |
-| PUT    | `/api/orders/<id>` | Edit order (products included) |
-| DELETE | `/api/orders/<id>` | Delete order                   |
-| GET    | `/api/products`    | List all products              |
-| POST   | `/api/products`    | Create a new product           |
-| PUT    | `/api/products/<id>` | Edit product                |
-| DELETE | `/api/products/<id>` | Soft delete (disable)       |
+| Method | Endpoint             | Description                    |
+|--------|----------------------|--------------------------------|
+| GET    | `/api/orders`        | List and filter orders         |
+| POST   | `/api/orders`        | Create new order               |
+| GET    | `/api/orders/<id>`   | View order details             |
+| PUT    | `/api/orders/<id>`   | Edit order (products included) |
+| DELETE | `/api/orders/<id>`   | Delete order                   |
+| GET    | `/api/products`      | List all products              |
+| POST   | `/api/products`      | Create a new product           |
+| PUT    | `/api/products/<id>` | Edit product                   |
+| DELETE | `/api/products/<id>` | Soft delete (disable product)  |
 
 ### Example payload (POST or PUT `/api/orders`)
 
