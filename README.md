@@ -14,6 +14,7 @@ The system allows full CRUD management of orders and products, with quantity sup
 - [Backend features](#backend-features)
 - [Testing](#testing)
 - [Credentials](#credentials)
+- [Test the application live](#hosted-deployment)
 
 ---
 
@@ -223,10 +224,20 @@ docker compose exec backend python manage.py test orders
 
 Tests cover:
 
-- Authentication via JWT
-- Order creation with valid/invalid products
-- Product validation and quantity logic
-- Deletion and update cases
+- Authenticated access with JWT tokens
+- Order creation with valid and invalid products
+- Quantity and product validation
+- Order update with new product list
+- Detail view including related products
+
+
+| Symbol  | Meaning                                |
+| ------- | -------------------------------------- |
+| `.`     | Test passed                            |
+| `F`     | Test failed (`AssertionError`, etc.)   |
+| `E`     | Error (`Exception`, unexpected crash)  |
+| `s`     | Test skipped (`@skip`)                 |
+
 
 ---
 
@@ -239,9 +250,9 @@ Tests cover:
 
 ---
 
-## Hosted deployment (Railway)
+## Hosted deployment
 
-You can test the application live using the links below:
+You can test the application live using the links below (Railway):
 
 - **Frontend**: [https://robust-tranquility-production.up.railway.app](https://robust-tranquility-production.up.railway.app)
 - **Backend**: [https://order-manager-production-dab7.up.railway.app](https://order-manager-production-dab7.up.railway.app)
