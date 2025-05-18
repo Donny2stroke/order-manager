@@ -14,7 +14,6 @@ The system allows full CRUD management of orders and products, with quantity sup
 - [Backend features](#backend-features)
 - [Testing](#testing)
 - [Credentials](#credentials)
-- [Resources consulted](#resources-consulted)
 
 ---
 
@@ -248,16 +247,3 @@ You can test the application live using the links below:
 - **Backend**: [https://order-manager-production-dab7.up.railway.app](https://order-manager-production-dab7.up.railway.app)
 
 ---
-
-## Resources consulted
-
-- [Django Docs](https://docs.djangoproject.com/en/4.2/)
-- [DRF Docs](https://www.django-rest-framework.org/)
-- [drf-spectacular](https://drf-spectacular.readthedocs.io/)
-- [Bootstrap 5 Docs](https://getbootstrap.com/)
-- [Vue 3 Docs](https://vuejs.org/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Font Awesome Docs](https://fontawesome.com/docs/web/use-with/vue/)
-- [Vue Router](https://router.vuejs.org/)
-- [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/)
-- [Testing DRF](https://medium.com/@akshatgadodia/testing-django-and-django-rest-framework-drf-ensuring-reliability-236f0fcbeee6)

@@ -30,7 +30,7 @@
               <font-awesome-icon icon="box" class="me-2 text-secondary" />
               {{ p.product.name }}
             </span>
-            <span v-if="!p.product.is_active" class="badge bg-secondary ms-2">non più attivo</span>
+            <span v-if="!p.product.is_active" class="badge bg-secondary ms-2">Deactivated</span>
             <span>
               {{ p.quantity }} x €{{ p.product.price }}
             </span>
