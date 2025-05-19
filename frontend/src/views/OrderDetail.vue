@@ -51,6 +51,7 @@ import api from '../utils/api'
 const route = useRoute()
 const order = ref(null)
 
+//Fetches the order details from the API using the order ID in the route.
 const fetchOrder = async () => {
   try {
     const { data } = await api.get(`/orders/${route.params.id}`)

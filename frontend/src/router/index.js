@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+
+// Import all route view
 import HomeView from '../views/HomeView.vue'
 import OrdersList from '../views/OrdersList.vue'
 import OrderDetail from '../views/OrderDetail.vue'
@@ -11,7 +13,7 @@ import ProductDetail from '../views/ProductDetail.vue'
 import ProductEdit from '../views/ProductEdit.vue'
 import ProductCreate from '../views/ProductCreate.vue'
 
-
+// Define application routes and associate each path with a component
 const routes = [
   { path: '/', name: 'home', component: HomeView },
   { path: '/orders', name: 'orders', component: OrdersList },
@@ -25,6 +27,7 @@ const routes = [
   { path: '/products/create', name: 'product-create', component: ProductCreate }
 ]
 
+// Create router instance using HTML5 history mode
 const router = createRouter({
   history: createWebHistory(),
   routes
@@ -32,6 +35,7 @@ const router = createRouter({
 
 export default router
 
+// Global navigation guard to enforce authentication logic
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
 
@@ -44,12 +48,11 @@ router.beforeEach((to, from, next) => {
   const publicPages = ['/', '/login']
   const authRequired = !publicPages.includes(to.path)
 
+  // If user is not logged in and tries to access a protected route → redirect to login
   if (authRequired && !token) {
     return next('/login')
   }
 
-  // Everything is ok
+  //Allow access
   next()
 })
-
-  

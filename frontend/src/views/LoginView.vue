@@ -54,18 +54,22 @@ const password = ref('')
 const error = ref('')
 const router = useRouter()
 
+// Function that handles login submission
 const handleLogin = async () => {
   try {
+    // Send credentials to obtain JWT tokens
     const { data } = await api.post(import.meta.env.VITE_API_URL + '/token/', {
       username: username.value,
       password: password.value
     })
-
+    // Save credentials to store (localStorage)
     login(username.value, data.access, data.refresh)
+
+    // Clear error and redirect to orders list
     error.value = ''
     router.push('/orders')
   } catch (err) {
-    error.value = 'Credenziali non valide'
+    error.value = 'Invalid credentials'
   }
 }
 </script>

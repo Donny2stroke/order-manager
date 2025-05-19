@@ -84,11 +84,13 @@ const order = ref(null)
 const products = ref([])
 const selectedProducts = ref([])
 
+//Retrieves the quantity of a given product in the order.
 const getQuantity = (productId) => {
   const found = selectedProducts.value.find((p) => p.product_id === productId)
   return found ? found.quantity : 0
 }
 
+//Updates or adds the quantity for a specific product. Removes entries with zero quantity.
 const updateQuantity = (productId, quantity) => {
   quantity = parseInt(quantity)
   selectedProducts.value = selectedProducts.value.filter(
@@ -99,15 +101,18 @@ const updateQuantity = (productId, quantity) => {
   }
 }
 
+//Loads all available products from the API.
 const loadProducts = async () => {
   const { data } = await api.get('/products')
   products.value = data
 }
 
+// On component mount: fetch the order details and product list
 onMounted(async () => {
   const { data } = await api.get(`/orders/${route.params.id}`)
   order.value = data
 
+  // Map the products into the selectedProducts structure
   selectedProducts.value = order.value.products.map((p) => ({
     product_id: p.product.id,
     quantity: p.quantity
@@ -116,6 +121,7 @@ onMounted(async () => {
   await loadProducts()
 })
 
+//Submits the updated order to the API.
 const updateOrder = async () => {
   try {
     await api.put(`/orders/${route.params.id}/`, {

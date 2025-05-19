@@ -60,11 +60,13 @@
 </template>
 
 <script setup>
+// Import authentication store and router
 import { auth, logout } from './stores/auth'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+// Handles logout: clears session and redirects to login
 const doLogout = () => {
   logout()
   router.push('/login')

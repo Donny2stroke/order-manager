@@ -70,14 +70,17 @@ const router = useRouter()
 const product = ref({})
 const error = ref('')
 
+//Fetches the product from the API using the product ID in the route.
 const fetchProduct = async () => {
   const response = await api.get(`/products/${route.params.id}/`)
   product.value = response.data
 }
 
+//Update product data after form submission
 const updateProduct = async () => {
   error.value = ''
 
+  //Fields validation
   if (!product.value.name || !product.value.name.trim()) {
     error.value = 'Product name is required.'
     return
@@ -90,11 +93,13 @@ const updateProduct = async () => {
   }
 
   try {
+    //Send updated product data to API
     await api.put(`/products/${route.params.id}/`, {
       name: product.value.name.trim(),
       price: parsedPrice,
       is_active: product.value.is_active 
     })
+    // Navigate to the product detail page
     router.push(`/products/${route.params.id}`)
   } catch (err) {
     error.value = 'Error saving changes.'

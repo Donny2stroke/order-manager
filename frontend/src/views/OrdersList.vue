@@ -70,6 +70,10 @@ const orders = ref([])
 const search = ref('')
 const date = ref('')
 
+/**
+* Fetches the list of orders from the API, applying filters if set.
+* Results are sorted by date (most recent first).
+*/
 const fetchOrders = async () => {
   try {
     const params = {}
@@ -83,7 +87,8 @@ const fetchOrders = async () => {
     })
 
     //orders.value = data
-
+    
+    // Sort orders by date descending
     orders.value = data.sort((a, b) => new Date(b.date) - new Date(a.date))
 
 
@@ -92,17 +97,20 @@ const fetchOrders = async () => {
   }
 }
 
+//Deletes an order after confirmation and updates the list.
 const deleteOrder = async (id) => {
   const confirmed = confirm('Are you sure you want to delete this order?')
   if (!confirmed) return
 
   try {
     await api.delete(`/orders/${id}/`)
+    // Remove order from local list
     orders.value = orders.value.filter(o => o.id !== id)
   } catch (err) {
     console.error("Error while deleting:", err)
   }
 }
 
+// Load orders when component mounts
 onMounted(fetchOrders)
 </script>

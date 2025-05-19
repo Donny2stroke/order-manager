@@ -58,6 +58,7 @@ const price = ref('')
 const error = ref('')
 const router = useRouter()
 
+//Submit function that validates the input and sends the product data to the API.
 const createProduct = async () => {
   error.value = ''
 
@@ -66,6 +67,7 @@ const createProduct = async () => {
     return
   }
 
+  // Validate and convert price
   const parsedPrice = parseFloat(price.value)
   if (isNaN(parsedPrice) || parsedPrice <= 0) {
     error.value = 'Price must be a number greater than 0.'
@@ -73,10 +75,12 @@ const createProduct = async () => {
   }
 
   try {
+    // Submit product to backend API
     await api.post('/products/', {
       name: name.value.trim(),
       price: parsedPrice
     })
+    // Redirect to products list on success
     router.push('/products')
   } catch (err) {
     error.value = 'Error creating product.'

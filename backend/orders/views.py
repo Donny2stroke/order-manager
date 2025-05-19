@@ -6,6 +6,7 @@ from .serializers import OrderSerializer, ProductSerializer
 from django.http import HttpResponse
 
 
+# Public homepage with a basic HTML interface for API overviewdef api_home(request):
 def api_home(request):
     return HttpResponse("""
         <html>
@@ -59,7 +60,10 @@ def api_home(request):
         </html>
     """)
 
-
+"""
+Provides full CRUD API for managing Orders.
+Includes filtering by date and search on name/description.
+"""
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all().order_by('-date')
     serializer_class = OrderSerializer
@@ -67,14 +71,21 @@ class OrderViewSet(viewsets.ModelViewSet):
     search_fields = ['name', 'description']
     filterset_fields = ['date']
 
-
+"""
+Provides full CRUD API for managing Products.
+Overrides the delete behavior to perform a soft delete (is_active = False).
+"""
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
     def get_queryset(self):
         return Product.objects.all()
-
+    
+    """
+    Soft delete the product by setting is_active = False
+    instead of removing the record from the database.
+    """
     def destroy(self, request, *args, **kwargs):
         product = self.get_object()
         product.is_active = False

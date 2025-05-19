@@ -2,10 +2,10 @@
 
 echo "Starting backend initialization..."
 
-# Esegui le migrazioni
+# Run migrations
 python manage.py migrate
 
-# Crea superuser admin se non esiste
+# Create superuser admin if it does not exist
 echo "Verify users..."
 
 echo "
@@ -21,7 +21,7 @@ if not User.objects.filter(username='frontend').exists():
     print('frontend User created')
 " | python manage.py shell
 
-# Prompt per i seed
+# Prompt for seeds
 if [ "$RUN_SEED" = "y" ]; then
     echo "Seed execution..."
     python manage.py shell < seed.py
@@ -30,6 +30,6 @@ else
     echo "Seeds ignored"
 fi
 
-# Avvia il server
+# Start the server
 echo "Starting Django..."
 exec python manage.py runserver 0.0.0.0:8000

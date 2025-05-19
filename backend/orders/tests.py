@@ -6,8 +6,19 @@ from orders.models import Product, Order, OrderProduct
 from rest_framework_simplejwt.tokens import RefreshToken
 from datetime import date
 
+"""
+Tests for Order API endpoints, covering:
+- Authentication
+- Order creation with valid and invalid inputs
+- Order update and retrieval
+"""
 class ExtendedOrderAPITestCase(APITestCase):
 
+    """
+    Common setup for all test cases:
+    - Creates a test user and generates a JWT token.
+    - Creates two example products in the database.
+    """
     def setUp(self):
         self.user = User.objects.create_user(username="admin", password="admin123")
         self.token = str(RefreshToken.for_user(self.user).access_token)
@@ -15,6 +26,12 @@ class ExtendedOrderAPITestCase(APITestCase):
         self.product1 = Product.objects.create(name="Prodotto 1", price=10.50)
         self.product2 = Product.objects.create(name="Prodotto 2", price=5.00)
 
+    """
+    Test updating an existing order's products:
+    - Create an order with product1
+    - Update the order replacing it with product2
+    - Verify product relation is updated
+    """
     def test_update_order_products(self):
         #create an order with a single product
         url = reverse('order-list')
@@ -45,6 +62,10 @@ class ExtendedOrderAPITestCase(APITestCase):
         self.assertEqual(OrderProduct.objects.filter(order_id=order_id).count(), 1)
         self.assertEqual(OrderProduct.objects.get(order_id=order_id).product_id, self.product2.id)
 
+    """
+    Test creating an order referencing a non-existing product.
+    Should fail with 400 BAD REQUEST.
+    """
     def test_create_order_with_invalid_product(self):
         url = reverse('order-list')
         data = {
@@ -58,6 +79,10 @@ class ExtendedOrderAPITestCase(APITestCase):
         response = self.client.post(url, data, format='json', **self.auth_header)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    """
+    Test creating an order with a negative quantity.
+    Should fail with 400 BAD REQUEST.
+    """
     def test_create_order_with_invalid_quantity(self):
         url = reverse('order-list')
         data = {
@@ -71,6 +96,11 @@ class ExtendedOrderAPITestCase(APITestCase):
         response = self.client.post(url, data, format='json', **self.auth_header)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    """
+    Test retrieving an order detail with related products:
+    - Creates an order linked to product1
+    - Retrieves the order and validates that products are included
+    """
     def test_get_order_details_returns_products(self):
         order = Order.objects.create(name="Dettaglio", description="test", date=date.today())
         OrderProduct.objects.create(order=order, product=self.product1, quantity=2)

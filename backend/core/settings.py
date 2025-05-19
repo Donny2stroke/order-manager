@@ -13,6 +13,7 @@ SECRET_KEY = 'django-insecure-b&s4=i^le_%k26szyq!aep)366mxrda*nne0k8dlm@tuf0x**7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Allow all hosts during development and for containerized environments
 ALLOWED_HOSTS = ["*"]
 
 
@@ -25,17 +26,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'django_filters',
-    'drf_spectacular',
-    'orders',
-    'corsheaders',
+    # Third-party apps
+    'rest_framework',                   # Django REST Framework for API
+    'django_filters',                   # Advanced filtering support
+    'drf_spectacular',                  # Swagger/OpenAPI documentation
+    'corsheaders',                      # Enable CORS support
+
+    # Local apps
+    'orders',                           # Core business logic app
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    # Middleware to enable CORS (must be before CommonMiddleware)
     'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -45,31 +52,33 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.JSONRenderer', # Responses in JSON only
     ],
     'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.JSONParser', # Accept JSON requests
     ],
     'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',
-        'rest_framework.filters.SearchFilter',
+        'django_filters.rest_framework.DjangoFilterBackend', # Filtering
+        'rest_framework.filters.SearchFilter', # Search support
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication', # JWT-based auth
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated', # Auth required by default
     ],
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'URL_TRAILING_SLASH': False,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema', # Swagger generator
+    'URL_TRAILING_SLASH': False, # Allow URLs without trailing slashes
 }
 
+# Allow CORS from local dev frontend and deployed frontend
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "https://robust-tranquility-production.up.railway.app"
 ]
 
+# Allow CSRF tokens from production when accessing admin
 CSRF_TRUSTED_ORIGINS = [
     'https://order-manager-production-dab7.up.railway.app',
 ]

@@ -54,6 +54,7 @@ import api from '../utils/api'
 const route = useRoute()
 const product = ref({})
 
+//Fetches the product details from the API using the product ID in the route.
 const fetchProduct = async () => {
   const response = await api.get(`/products/${route.params.id}/`)
   product.value = response.data

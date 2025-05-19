@@ -85,11 +85,16 @@ import api from '../utils/api'
 
 const products = ref([])
 
+//Load all products from the backend API
 const fetchProducts = async () => {
   const response = await api.get('/products/')
   products.value = response.data
 }
 
+/**
+* Soft delete (deactivate) a product
+* This sets is_active = false on backend
+*/
 const deleteProduct = async (id) => {
   if (confirm('Are you sure you want to deactivate this product?')) {
     try {
@@ -104,10 +109,11 @@ const deleteProduct = async (id) => {
   }
 }
 
+//List of active products
 const activeProducts = computed(() =>
   products.value.filter(p => p.is_active)
 )
-
+//List of deactivated (inactive) products
 const inactiveProducts = computed(() =>
   products.value.filter(p => !p.is_active)
 )

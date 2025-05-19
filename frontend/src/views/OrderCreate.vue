@@ -86,6 +86,7 @@ const selectedProducts = ref([])
 const formError = ref('')
 const router = useRouter()
 
+// Load product list on mount
 const loadProducts = async () => {
   const { data } = await api.get('/products')
   products.value = data
@@ -93,11 +94,13 @@ const loadProducts = async () => {
 
 onMounted(loadProducts)
 
+// Return the selected quantity for a given product
 const getQuantity = (productId) => {
   const found = selectedProducts.value.find((p) => p.product_id === productId)
   return found ? found.quantity : 0
 }
 
+// Update selected quantity or remove product if quantity = 0
 const updateQuantity = (productId, quantity) => {
   quantity = parseInt(quantity)
   selectedProducts.value = selectedProducts.value.filter(
@@ -108,10 +111,12 @@ const updateQuantity = (productId, quantity) => {
   }
 }
 
+// Create a new order with the entered data
 const createOrder = async () => {
   formError.value = ''
+  // Must include at least one product with valid quantity
   if (selectedProducts.value.length === 0) {
-    formError.value = 'Devi selezionare almeno un prodotto con quantità.'
+    formError.value = 'You must select at least one product with quantity.'
     return
   }
 
@@ -125,7 +130,7 @@ const createOrder = async () => {
     router.push('/orders')
   } catch (err) {
     console.error('Errore nella creazione:', err)
-    formError.value = 'Errore durante la creazione. Riprova.'
+    formError.value = 'Error creating. Please try again.'
   }
 }
 </script>

@@ -109,7 +109,7 @@ python manage.py runserver
 - Swagger UI documentation (`/api/docs`)
 - All endpoints available under `/api/`
 
-### WHY SOFT DELETE FOR PRODUCTS?
+### Why soft delete for products?
 
 In this project, product deletion is handled via soft delete, meaning that when a product is "deleted", it is only marked as inactive (e.g. is_active = False) and excluded from active listings — but it is not physically removed from the database.
 
