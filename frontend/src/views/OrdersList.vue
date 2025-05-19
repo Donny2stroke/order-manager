@@ -14,7 +14,7 @@
     <form class="row g-3 align-items-end mb-4" @submit.prevent="fetchOrders">
       <div class="col-md-5">
         <label class="form-label">Search by name or description</label>
-        <input v-model="search" type="text" class="form-control" placeholder="Es. Mario Rossi" />
+        <input v-model="search" type="text" class="form-control" placeholder="Es. Mario Rossi / Order on commission" />
       </div>
       <div class="col-md-3">
         <label class="form-label">Date</label>
