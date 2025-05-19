@@ -104,10 +104,23 @@ python manage.py runserver
 - JWT Authentication (login, refresh, protected endpoints)
 - Order creation with multiple products and quantities
 - Order filtering (by date) and search (by name or description)
-- Soft delete for products (they remain visible in order history)
+- Soft delete for products (they remain visible in order detail)
 - Admin interface with tabular inline editing
 - Swagger UI documentation (`/api/docs`)
 - All endpoints available under `/api/`
+
+### WHY SOFT DELETE FOR PRODUCTS?
+
+In this project, product deletion is handled via soft delete, meaning that when a product is "deleted", it is only marked as inactive (e.g. is_active = False) and excluded from active listings — but it is not physically removed from the database.
+
+This design choice ensures data consistency for the Order entity.
+
+Since each order contains references to the products that were available at the time of the transaction, deleting a product entirely would break the integrity of existing order data (e.g., orphaned product_id references in OrderProduct).
+By using soft delete:
+ - Existing orders continue to display the correct products
+ - No risk of broken foreign key references or missing product info in order detail views
+
+
 
 ### Available API endpoints
 
