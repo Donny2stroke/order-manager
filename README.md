@@ -235,6 +235,20 @@ Run all backend tests with:
 docker compose exec backend python manage.py test orders
 ```
 
+Alternatively, you can run tests manually by entering the backend container:
+
+```bash
+docker compose up -d # Start services in background (if not already running)
+docker compose exec backend bash
+```
+
+Once inside the container, execute:
+
+```bash
+python manage.py test orders
+```
+
+
 Tests cover:
 
 - Authenticated access with JWT tokens
@@ -269,5 +283,10 @@ You can test the application live using the links below (Railway):
 
 - **Frontend**: [https://robust-tranquility-production.up.railway.app](https://robust-tranquility-production.up.railway.app)
 - **Backend**: [https://order-manager-production-dab7.up.railway.app](https://order-manager-production-dab7.up.railway.app)
+
+Note:
+The hosting environment is serverless. This means that both frontend and backend services automatically scale down and "sleep" after ~10 minutes of inactivity.
+On first access, there may be a short delay of a few seconds while the server spins up.
+Once activated, performance returns to normal for subsequent requests.
 
 ---
