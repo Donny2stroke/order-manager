@@ -70,6 +70,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://robust-tranquility-production.up.railway.app"
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://robust-tranquility-production.up.railway.app',
+]
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
