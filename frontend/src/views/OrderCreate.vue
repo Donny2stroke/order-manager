@@ -89,7 +89,7 @@ const router = useRouter()
 // Load product list on mount
 const loadProducts = async () => {
   const { data } = await api.get('/products')
-  products.value = data
+  products.value = data.filter(p => p.is_active)
 }
 
 onMounted(loadProducts)
