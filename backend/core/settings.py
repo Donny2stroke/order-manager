@@ -71,7 +71,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://robust-tranquility-production.up.railway.app',
+    'https://order-manager-production-dab7.up.railway.app',
 ]
 
 ROOT_URLCONF = 'core.urls'
