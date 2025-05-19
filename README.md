@@ -75,6 +75,12 @@ Example:
 RUN_SEED=y docker compose up --build
 ```
 
+If you use windows use:
+```bash
+set RUN_SEED=y
+docker compose up --build
+```
+
 ---
 
 ### Run backend locally (without Docker)
