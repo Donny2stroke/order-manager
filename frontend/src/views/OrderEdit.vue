@@ -45,9 +45,12 @@
                 v-for="prod in products"
                 :key="prod.id"
               >
-                <label class="form-label mb-0 w-75">
-                  <font-awesome-icon icon="box" class="me-2 text-secondary" />
-                  {{ prod.name }} - €{{ prod.price }}
+                <label class="form-label mb-0 w-75 d-flex justify-content-between align-items-center">
+                  <div>
+                    <font-awesome-icon icon="box" class="me-2 text-secondary" />
+                    {{ prod.name }} - €{{ prod.price }}
+                  </div>
+                  <span v-if="!prod.is_active" class="badge bg-secondary">Deactivated</span>
                 </label>
                 <input
                   type="number"
@@ -101,10 +104,19 @@ const updateQuantity = (productId, quantity) => {
   }
 }
 
-//Loads all available products from the API.
+// Loads products and merges active + selected inactive
 const loadProducts = async () => {
-  const { data } = await api.get('/products')
-  products.value = data
+  const { data: allProducts } = await api.get('/products')
+
+  // Products selected in the order (could be inactive)
+  const selectedIds = selectedProducts.value.map(p => p.product_id)
+  const selectedProductsInfo = allProducts.filter(p => selectedIds.includes(p.id))
+
+  // Active products not already selected
+  const activeNotSelected = allProducts.filter(p => p.is_active && !selectedIds.includes(p.id))
+
+  // Merge selected (even if inactive) with active products not already in the order
+  products.value = [...selectedProductsInfo, ...activeNotSelected]
 }
 
 // On component mount: fetch the order details and product list
