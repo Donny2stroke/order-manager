@@ -11,7 +11,7 @@
 
             <form @submit.prevent="createOrder">
               <div class="mb-3">
-                <label class="form-label">Customer name</label>
+                <label class="form-label">Customer name*</label>
                 <input
                   v-model="name"
                   type="text"
@@ -21,7 +21,7 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Date</label>
+                <label class="form-label">Date*</label>
                 <input
                   v-model="date"
                   type="date"
@@ -31,11 +31,12 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Description</label>
+                <label class="form-label">Description*</label>
                 <textarea
                   v-model="description"
                   class="form-control"
                   placeholder="Order details"
+                  required
                 ></textarea>
               </div>
 
